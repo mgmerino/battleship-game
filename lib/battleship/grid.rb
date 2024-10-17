@@ -11,19 +11,24 @@ module Battleship
     end
 
     def place_ship(ship)
-      coordinates = calculate_coordinates(ship)
+      coordinates = self.class.calculate_coordinates(ship)
       check_out_of_bounds(coordinates)
       check_valid_placement(coordinates)
 
       coordinates.each { |row, col| @cells[row][col].place_ship_unit }
+      true
+    rescue ArgumentError
+      false
     end
 
     def attack(coordinate)
-      row, col = parse_coordinates(coordinate)
-      @cells[row][col].hit
+      row, col = self.class.parse_coordinates(coordinate)
+      result = @cells[row][col].hit
+
+      [result, [row, col]]
     end
 
-    def calculate_coordinates(ship)
+    def self.calculate_coordinates(ship)
       row, col = parse_coordinates(ship.start_coordinate)
       coordinates = []
 
@@ -38,9 +43,9 @@ module Battleship
 
     private
 
-    def parse_coordinates(coordinate)
-      col = coordinate[0].ord - "A".ord
-      row = coordinate[1..-1].to_i - 1
+    def self.parse_coordinates(coordinate)
+      row = coordinate[0].ord - "A".ord
+      col = coordinate[1..-1].to_i - 1
 
       [row, col]
     end

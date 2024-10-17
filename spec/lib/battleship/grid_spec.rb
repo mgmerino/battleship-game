@@ -40,28 +40,28 @@ module Battleship
       end
 
       context "when ship is out of bounds" do
-        let(:ship) { Ship.new(5, "E1", :horizontal) }
+        let(:ship) { Ship.new(5, "E5", :horizontal) }
 
-        it "raises an error" do
-          expect { grid.place_ship(ship) }.to raise_error(ArgumentError, "Ship outside grid")
+        it "returns false" do
+          expect(grid.place_ship(ship)).to eq false
         end
       end
 
       context "when ship is on top of another ship" do
-        it "raises an error" do
+        it "returns false" do
           grid.place_ship(ship)
 
-          expect { grid.place_ship(ship) }.to raise_error(ArgumentError, "Ship on top of another ship")
+          expect(grid.place_ship(ship)).to eq false
         end
       end
     end
 
     describe "#attack" do
       context "when attack hits a ship" do
-        it "returns true" do
+        it "returns true and parsed coordinates" do
           grid.place_ship(ship)
 
-          expect(grid.attack("A1")).to eq true
+          expect(grid.attack("A1")).to eq [true, [0, 0]]
         end
 
         it "changes the state of the cell to hit" do
@@ -73,8 +73,8 @@ module Battleship
       end
 
       context "when attack misses a ship" do
-        it "returns false" do
-          expect(grid.attack("A1")).to eq false
+        it "returns false and parsed coordinates" do
+          expect(grid.attack("A1")).to eq [false, [0, 0]]
         end
 
         it "changes the state of the cell to miss" do
@@ -85,12 +85,12 @@ module Battleship
       end
     end
 
-    describe "#calculate_coordinates" do
+    describe ".calculate_coordinates" do
       context "when ship is placed horizontally" do
         let(:orientation) { :horizontal }
 
         it "returns expected array of coordinates" do
-          expect(grid.calculate_coordinates(ship)).to eq [[0, 0], [0, 1], [0, 2]]
+          expect(described_class.calculate_coordinates(ship)).to eq [[0, 0], [0, 1], [0, 2]]
         end
       end
 
@@ -98,7 +98,7 @@ module Battleship
         let(:orientation) { :vertical }
 
         it "returns expected array of coordinates" do
-          expect(grid.calculate_coordinates(ship)).to eq [[0, 0], [1, 0], [2, 0]]
+          expect(described_class.calculate_coordinates(ship)).to eq [[0, 0], [1, 0], [2, 0]]
         end
       end
     end
