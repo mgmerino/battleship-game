@@ -4,6 +4,10 @@ require_relative "battleship/version"
 require_relative "battleship/grid"
 require_relative "battleship/cell"
 require_relative "battleship/ship"
+require_relative "battleship/player"
+require_relative "battleship/engine"
+require_relative "battleship/terminal/interface"
+require_relative "battleship/terminal/presenter"
 
 module Battleship
   class Error < StandardError; end
