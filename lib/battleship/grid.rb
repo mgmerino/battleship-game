@@ -34,8 +34,7 @@ module Battleship
 
     def place_ship(ship)
       coordinates = self.class.calculate_coordinates(ship)
-      check_out_of_bounds(coordinates)
-      check_valid_placement(coordinates)
+      validate_placement(coordinates)
 
       coordinates.each { |row, col| @cells[row][col].place_ship_unit }
       true
@@ -52,16 +51,18 @@ module Battleship
 
     private
 
-    def check_out_of_bounds(coordinates)      
-      return if coordinates.all? { |row, col| row.between?(0, GRID_SIZE - 1) && col.between?(0, GRID_SIZE - 1) }
+    def validate_placement(coordinates)      
+      return if coordinates.all? { |row, col| is_within_bounds?(row, col) && is_water?(row, col) }
       
-      raise ArgumentError, "Ship outside grid"
+      raise ArgumentError, "Invalid ship placement!"
     end
 
-    def check_valid_placement(coordinates)
-      return if coordinates.all? { |row, col| @cells[row][col].state == :water }
+    def is_water?(row, col)
+      @cells[row][col].state == :water
+    end
 
-      raise ArgumentError, "Ship on top of another ship"
+    def is_within_bounds?(row, col)
+      row.between?(0, GRID_SIZE - 1) && col.between?(0, GRID_SIZE - 1)
     end
   end
 end
