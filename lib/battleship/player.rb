@@ -7,9 +7,9 @@ module Battleship
     class << self
       def attack_to(opponent, coordinate)
         success, parsed_coordinates = opponent.grid.attack(coordinate)
-  
+
         hit_opponent_ship(opponent, parsed_coordinates) if success
-        
+
         success
       end
 

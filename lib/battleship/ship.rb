@@ -12,8 +12,8 @@ module Battleship
     end
 
     def hit
-      raise RuntimeError, "Ship already sunk" if sunk?
-      
+      raise "Ship already sunk" if sunk?
+
       @hp -= 1
       sunk?
     end
