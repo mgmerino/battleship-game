@@ -13,9 +13,11 @@ module Battleship
         [size, coord, orientation]
       end
 
-      def attack_coordinates(player)
-        print "#{player.name}, enter coordinate to attack (<[A-E][1-5]>): "
-        gets.chomp.upcase
+      def attack_coordinates(player) 
+        request_input("#{player.name}, enter coordinate to attack (<[A-E][1-5]>): ", 
+                      method(:valid_coordinate?),
+                      :upcase,
+                      "Invalid coordinate!")
       end
 
       def pause_for_user
