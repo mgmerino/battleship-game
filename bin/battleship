@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "battleship"
+
+# TODO: move this stuff into the interface
+puts "Welcome to Battleship!"
+puts "Enter the name of Player 1:"
+player1_name = gets.chomp
+puts "Enter the name of Player 2:"
+player2_name = gets.chomp
+
+players = [
+  Battleship::Player.new(player1_name),
+  Battleship::Player.new(player2_name)
+]
+
+interface = Battleship::Terminal::Interface.new(players)
+interface.run
