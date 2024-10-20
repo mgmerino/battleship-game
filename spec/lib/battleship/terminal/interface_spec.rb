@@ -20,7 +20,7 @@ module Battleship
         allow(presenter).to receive(:display_grids)
         allow(presenter).to receive(:display_attack_result)
         allow(presenter).to receive(:display_current_board)
-        allow(input_handler).to receive(:get_ship_placement_input)
+        allow(input_handler).to receive(:ship_placement_input)
         allow(input_handler).to receive(:pause_for_user)
         allow(input_handler).to receive(:get_attack_coordinates)
         allow(game_engine).to receive(:players).and_return(players)

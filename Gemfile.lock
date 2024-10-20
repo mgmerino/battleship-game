@@ -68,7 +68,7 @@ DEPENDENCIES
   battleship!
   debug (~> 1.9.2)
   rake (~> 13.0)
-  rspec (~> 3.0)
+  rspec (~> 3.2)
   rubocop (~> 1.21)
 
 BUNDLED WITH
