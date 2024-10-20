@@ -16,7 +16,7 @@ module Battleship
 
     describe "#place_ship" do
       context "when ship is placed horizontally" do
-        let (:orientation) { :horizontal }
+        let(:orientation) { :horizontal }
 
         it "places the ship on the grid" do
           grid.place_ship(ship)
@@ -28,7 +28,7 @@ module Battleship
       end
 
       context "when ship is placed vertically" do
-        let (:orientation) { :vertical }
+        let(:orientation) { :vertical }
 
         it "places the ship on the grid" do
           grid.place_ship(ship)

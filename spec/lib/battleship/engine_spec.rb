@@ -16,7 +16,7 @@ module Battleship
       end
     end
 
-    describe ".spawn_ship" do
+    describe "#spawn_ship" do
       let(:size) { 2 }
       let(:start_coord) { "A1" }
       let(:orientation) { "h" }
@@ -24,7 +24,7 @@ module Battleship
       it "places a ship on the player's grid" do
         expect(player1).to receive(:place_ship).with(instance_of(Ship))
 
-        described_class.spawn_ship(player1, size, start_coord, orientation)
+        engine.spawn_ship(player1, size, start_coord, orientation)
       end
     end
 
@@ -38,7 +38,7 @@ module Battleship
     end
 
     describe "#attack" do
-      let(:coordinates) { "A1"}
+      let(:coordinates) { "A1" }
 
       it "attacks the opponent's grid" do
         expect(Player).to receive(:attack_to).with(player2, coordinates)

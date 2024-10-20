@@ -28,7 +28,7 @@ module Battleship
         end
 
         it "does not place the ship on the grid" do
-          expect { subject }.not_to change { player.ships.count }
+          expect { subject }.not_to(change { player.ships.count })
         end
 
         it "returns false" do

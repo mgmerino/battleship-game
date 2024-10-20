@@ -13,7 +13,7 @@ module Battleship
     describe "#place_ship_unit" do
       it "places a ship unit" do
         cell.place_ship_unit
-        
+
         expect(cell.state).to eq :ship
       end
     end
