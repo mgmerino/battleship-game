@@ -1,6 +1,6 @@
 steps:
   - name: test
-    image: ruby:3.5.5
+    image: ruby:latest
     commands:
       - echo "🧪 Running specs and static analysis..."
       - bundle install
