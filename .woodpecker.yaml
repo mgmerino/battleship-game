@@ -5,6 +5,3 @@ steps:
       - echo "🧪 Running specs and static analysis..."
       - bundle install
       - bundle exec rake
-    when:
-      - event: push
-
