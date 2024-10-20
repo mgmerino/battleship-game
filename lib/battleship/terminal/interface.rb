@@ -33,7 +33,7 @@ module Battleship
 
         until valid
           @presenter.display_current_board(player.grid)
-          size, coord, orientation = @input_handler.get_ship_placement_input
+          size, coord, orientation = @input_handler.ship_placement_input
 
           valid = @game_engine.spawn_ship(player, size, coord, orientation)
           @presenter.display_invalid_placement_message unless valid

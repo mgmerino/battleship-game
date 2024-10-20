@@ -16,7 +16,6 @@ module Battleship
           expect(presenter).to receive(:puts).with("~~~~~~🚢~~~~~~~~~~")
           expect(presenter).to receive(:puts).with("\nWelcome to Battleship! 🌊🚢🌊 \n Press enter to start the game.")
           expect(presenter).to receive(:gets)
-          
 
           presenter.display_welcome_message
         end

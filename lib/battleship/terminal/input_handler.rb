@@ -3,7 +3,7 @@
 module Battleship
   module Terminal
     class InputHandler
-      def get_ship_placement_input
+      def ship_placement_input
         size = request_input("Enter the ship size: ", method(:valid_size?), :to_i, "Invalid size!")
         coord = request_input("Enter the starting coordinate (<[A-E][1-5]>): ", method(:valid_coordinate?), :upcase,
                               "Invalid coordinate!")
@@ -13,8 +13,8 @@ module Battleship
         [size, coord, orientation]
       end
 
-      def attack_coordinates(player) 
-        request_input("#{player.name}, enter coordinate to attack (<[A-E][1-5]>): ", 
+      def attack_coordinates(player)
+        request_input("#{player.name}, enter coordinate to attack (<[A-E][1-5]>): ",
                       method(:valid_coordinate?),
                       :upcase,
                       "Invalid coordinate!")
