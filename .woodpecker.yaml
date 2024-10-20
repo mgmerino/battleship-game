@@ -4,11 +4,7 @@ steps:
     commands:
       - echo "🧪 Running specs and static analysis..."
       - bundle install
-      - bundle exec rspec
-      - bundle exec rubocop
+      - bundle exec rake
     when:
       - event: push
-        path:
-          - lib/*
-          - spec/*
 
