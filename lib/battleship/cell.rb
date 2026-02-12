@@ -30,7 +30,7 @@ module Battleship
     end
 
     def hit_or_miss?
-      @state == STATE[:ship] || @state == STATE[:miss]
+      @state == STATE[:hit] || @state == STATE[:miss]
     end
 
     def to_s
