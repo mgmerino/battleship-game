@@ -45,8 +45,11 @@ module Battleship
 
     def attack(coordinate)
       row, col = self.class.parse_coordinates(coordinate)
-      result = @cells[row][col].hit
+      cell = @cells[row][col]
 
+      return [:already_attacked, [row, col]] if cell.attacked?
+
+      result = cell.hit
       [result, [row, col]]
     end
 

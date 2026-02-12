@@ -42,6 +42,10 @@ module Battleship
         puts result ? "💥 Hit!" : "🌊 Miss!"
       end
 
+      def display_already_attacked
+        puts "You already attacked this coordinate! Try again."
+      end
+
       def display_switch_turn
         puts "Switching turns... Press enter to continue."
       end

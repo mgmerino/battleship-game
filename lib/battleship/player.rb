@@ -6,11 +6,13 @@ module Battleship
 
     class << self
       def attack_to(opponent, coordinate)
-        success, parsed_coordinates = opponent.grid.attack(coordinate)
+        result, parsed_coordinates = opponent.grid.attack(coordinate)
 
-        hit_opponent_ship(opponent, parsed_coordinates) if success
+        return :already_attacked if result == :already_attacked
 
-        success
+        hit_opponent_ship(opponent, parsed_coordinates) if result
+
+        result
       end
 
       private

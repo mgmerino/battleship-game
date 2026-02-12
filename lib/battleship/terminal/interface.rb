@@ -50,7 +50,11 @@ module Battleship
           @presenter.display_grids(player, opponent)
 
           coordinates = @input_handler.attack_coordinates(player)
-          handle_attack(@game_engine.attack(coordinates))
+          result = @game_engine.attack(coordinates)
+
+          next @presenter.display_already_attacked if result == :already_attacked
+
+          handle_attack(result)
         end
       end
 
