@@ -42,8 +42,8 @@ module Battleship
           ship.hit
         end
 
-        it "raises an error" do
-          expect { ship.hit }.to raise_error(RuntimeError, "Ship already sunk")
+        it "raises an AlreadySunkError" do
+          expect { ship.hit }.to raise_error(Ship::AlreadySunkError, "Ship already sunk")
         end
       end
     end
