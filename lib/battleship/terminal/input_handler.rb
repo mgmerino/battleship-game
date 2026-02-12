@@ -3,18 +3,28 @@
 module Battleship
   module Terminal
     class InputHandler
+      def initialize(grid_size = Grid::DEFAULT_SIZE)
+        @grid_size = grid_size
+      end
+
       def ship_placement_input
+        max_letter = ("A".ord + @grid_size - 1).chr
+        coord_hint = "<[A-#{max_letter}][1-#{@grid_size}]>"
+
         size = request_input("Enter the ship size: ", method(:valid_size?), :to_i, "Invalid size!")
-        coord = request_input("Enter the starting coordinate (<[A-E][1-5]>): ", method(:valid_coordinate?), :upcase,
+        coord = request_input("Enter the starting coordinate (#{coord_hint}): ", method(:valid_coordinate?), :upcase,
                               "Invalid coordinate!")
-        orientation = request_input("Enter direction (horizontal/vertical): ", method(:valid_direction?), :to_s,
+        orientation = request_input("Enter direction (h/v): ", method(:valid_direction?), :to_s,
                                     "Invalid direction!")
 
         [size, coord, orientation]
       end
 
       def attack_coordinates(player)
-        request_input("#{player.name}, enter coordinate to attack (<[A-E][1-5]>): ",
+        max_letter = ("A".ord + @grid_size - 1).chr
+        coord_hint = "<[A-#{max_letter}][1-#{@grid_size}]>"
+
+        request_input("#{player.name}, enter coordinate to attack (#{coord_hint}): ",
                       method(:valid_coordinate?),
                       :upcase,
                       "Invalid coordinate!")
@@ -37,11 +47,12 @@ module Battleship
       end
 
       def valid_size?(size)
-        size.between?(1, 5)
+        size.between?(1, @grid_size)
       end
 
       def valid_coordinate?(coord)
-        coord.match?(/^[A-E][1-5]$/)
+        max_letter = ("A".ord + @grid_size - 1).chr
+        coord.match?(/^[A-#{max_letter}][1-#{@grid_size}]$/)
       end
 
       def valid_direction?(orientation)

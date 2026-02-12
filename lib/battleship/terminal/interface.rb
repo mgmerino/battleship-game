@@ -21,7 +21,7 @@ module Battleship
         @presenter.display_welcome_message
         @game_engine.players.each do |player|
           @presenter.display_player_turn(player)
-          Engine::NUMBER_OF_SHIPS.times do
+          @game_engine.number_of_ships.times do
             place_ship_for_player(player)
             @presenter.clear_screen
           end

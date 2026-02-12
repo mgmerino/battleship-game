@@ -61,8 +61,11 @@ module Battleship
       end
 
       def display_grid(grid, hide_ships: false)
-        puts "  1 2 3 4 5"
-        ("A".."E").each_with_index do |row_label, i|
+        grid_size = grid.size
+        col_labels = (1..grid_size).map(&:to_s).join(" ")
+        puts "  #{col_labels}"
+        max_letter = ("A".ord + grid_size - 1).chr
+        ("A"..max_letter).each_with_index do |row_label, i|
           row = grid.cells[i].map do |cell|
             if hide_ships && cell.state == :ship
               SYMBOLS_TO_CHARACTERS[:water]
@@ -72,7 +75,7 @@ module Battleship
           end.join(" ")
           puts "#{row_label} #{row}"
         end
-        puts "-" * 11
+        puts "-" * (grid_size * 2 + 1)
       end
 
       private
