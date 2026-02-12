@@ -86,7 +86,7 @@ module Battleship
         end
 
         it "returns false" do
-          expect(cell.hit_or_miss?).to eq false
+          expect(cell.attacked?).to eq false
         end
       end
 
