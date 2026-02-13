@@ -65,27 +65,28 @@ module Battleship
       end
 
       def display_grid(grid, hide_ships: false)
-        grid_size = grid.size
-        col_labels = (1..grid_size).map(&:to_s).join(" ")
-        puts "  #{col_labels}"
-        max_letter = ("A".ord + grid_size - 1).chr
+        print_grid_header(grid.size)
+        max_letter = ("A".ord + grid.size - 1).chr
         ("A"..max_letter).each_with_index do |row_label, i|
-          row = grid.cells[i].map do |cell|
-            if hide_ships && cell.state == :ship
-              SYMBOLS_TO_CHARACTERS[:water]
-            else
-              display_cell(cell)
-            end
-          end.join(" ")
-          puts "#{row_label} #{row}"
+          puts "#{row_label} #{format_row(grid.cells[i], hide_ships)}"
         end
-        puts "-" * (grid_size * 2 + 1)
+        puts "-" * ((grid.size * 2) + 1)
       end
 
       private
 
-      def display_cell(cell)
-        SYMBOLS_TO_CHARACTERS[cell.state]
+      def print_grid_header(grid_size)
+        puts "  #{(1..grid_size).map(&:to_s).join(" ")}"
+      end
+
+      def format_row(cells, hide_ships)
+        cells.map do |cell|
+          if hide_ships && cell.state == :ship
+            SYMBOLS_TO_CHARACTERS[:water]
+          else
+            SYMBOLS_TO_CHARACTERS[cell.state]
+          end
+        end.join(" ")
       end
 
       def end_game_animation

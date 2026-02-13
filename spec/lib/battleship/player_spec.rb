@@ -109,6 +109,16 @@ module Battleship
           expect(subject).to eq(false)
         end
       end
+
+      context "when attacking an already attacked cell" do
+        before do
+          described_class.attack_to(opponent, "A1")
+        end
+
+        it "returns :already_attacked" do
+          expect(subject).to eq(:already_attacked)
+        end
+      end
     end
   end
 end
