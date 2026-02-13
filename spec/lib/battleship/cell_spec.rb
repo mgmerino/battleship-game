@@ -80,6 +80,16 @@ module Battleship
         end
       end
 
+      context "when it is a ship unit" do
+        before do
+          cell.place_ship_unit
+        end
+
+        it "returns false" do
+          expect(cell.attacked?).to eq false
+        end
+      end
+
       context "when it is water" do
         it "returns false" do
           expect(cell.attacked?).to eq false

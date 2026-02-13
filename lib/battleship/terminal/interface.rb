@@ -2,13 +2,19 @@
 
 module Battleship
   module Terminal
+    # Orchestrates the game flow: setup, gameplay loop, and end game.
+    # Coordinates between Engine, Presenter, and InputHandler.
     class Interface
+      # @param players [Array<Player>] the two players
+      # @param presenter [Presenter] handles display output
+      # @param input_handler [InputHandler] handles user input
       def initialize(players, presenter = Presenter.new, input_handler = InputHandler.new)
         @game_engine = Engine.new(players)
         @presenter = presenter
         @input_handler = input_handler
       end
 
+      # Runs the full game: setup, play, and end phases.
       def run
         setup_game
         play_game
