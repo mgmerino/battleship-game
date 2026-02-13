@@ -51,8 +51,13 @@ module Battleship
       end
 
       def valid_coordinate?(coord)
+        return false unless coord.match?(/^[A-Z]\d+$/)
+
         max_letter = ("A".ord + @grid_size - 1).chr
-        coord.match?(/^[A-#{max_letter}][1-#{@grid_size}]$/)
+        row = coord[0]
+        col = coord[1..].to_i
+
+        row.between?("A", max_letter) && col.between?(1, @grid_size)
       end
 
       def valid_direction?(orientation)

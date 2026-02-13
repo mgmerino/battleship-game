@@ -1,5 +1,13 @@
 AllCops:
   TargetRubyVersion: 3.3.5
+  NewCops: enable
+  SuggestExtensions: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -12,6 +20,15 @@ Style/Documentation:
 
 Metrics/BlockLength:
   Max: 100
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/AbcSize:
+  Max: 18
 
 Metrics/MethodLength:
   Max: 12

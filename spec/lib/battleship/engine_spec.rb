@@ -14,6 +14,18 @@ module Battleship
       it "sets the opponent" do
         expect(engine.opponent).to eq(player2)
       end
+
+      it "defaults to 1 ship" do
+        expect(engine.number_of_ships).to eq(1)
+      end
+
+      context "with custom number of ships" do
+        let(:engine) { described_class.new([player1, player2], number_of_ships: 3) }
+
+        it "uses the specified number of ships" do
+          expect(engine.number_of_ships).to eq(3)
+        end
+      end
     end
 
     describe "#spawn_ship" do

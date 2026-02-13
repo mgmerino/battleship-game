@@ -12,6 +12,20 @@ module Battleship
         expect(grid.cells.size).to eq 5
         expect(grid.cells.all? { |row| row.size == 5 }).to eq true
       end
+
+      it "exposes the grid size" do
+        expect(grid.size).to eq 5
+      end
+
+      context "with custom size" do
+        let(:grid) { described_class.new(8) }
+
+        it "creates a grid with the specified size" do
+          expect(grid.cells.size).to eq 8
+          expect(grid.cells.all? { |row| row.size == 8 }).to eq true
+          expect(grid.size).to eq 8
+        end
+      end
     end
 
     describe "#place_ship" do
@@ -81,6 +95,21 @@ module Battleship
           grid.attack("A1")
 
           expect(grid.cells[0][0].state).to eq :miss
+        end
+      end
+
+      context "when attacking an already attacked cell" do
+        it "returns :already_attacked after a hit" do
+          grid.place_ship(ship)
+          grid.attack("A1")
+
+          expect(grid.attack("A1")).to eq [:already_attacked, [0, 0]]
+        end
+
+        it "returns :already_attacked after a miss" do
+          grid.attack("A1")
+
+          expect(grid.attack("A1")).to eq [:already_attacked, [0, 0]]
         end
       end
     end
