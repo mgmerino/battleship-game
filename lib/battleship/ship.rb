@@ -2,6 +2,8 @@
 
 module Battleship
   class Ship
+    class AlreadySunkError < Battleship::Error; end
+
     attr_reader :size, :hp, :orientation, :start_coordinate
 
     def initialize(size, start_coordinate, orientation)
@@ -12,7 +14,7 @@ module Battleship
     end
 
     def hit
-      raise "Ship already sunk" if sunk?
+      raise AlreadySunkError, "Ship already sunk" if sunk?
 
       @hp -= 1
       sunk?

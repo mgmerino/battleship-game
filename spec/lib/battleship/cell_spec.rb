@@ -49,9 +49,10 @@ module Battleship
     end
 
     describe "#hit_or_miss?" do
-      context "when it is a ship unit" do
+      context "when it is a hit" do
         before do
           cell.place_ship_unit
+          cell.hit
         end
 
         it "returns true" do
@@ -66,6 +67,16 @@ module Battleship
 
         it "returns true" do
           expect(cell.hit_or_miss?).to eq true
+        end
+      end
+
+      context "when it is a ship unit" do
+        before do
+          cell.place_ship_unit
+        end
+
+        it "returns false" do
+          expect(cell.hit_or_miss?).to eq false
         end
       end
 
