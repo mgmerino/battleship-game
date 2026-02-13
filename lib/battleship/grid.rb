@@ -2,9 +2,9 @@
 
 module Battleship
   class Grid
-    GRID_SIZE = 5
+    DEFAULT_SIZE = 5
 
-    attr_reader :cells
+    attr_reader :cells, :size
 
     class << self
       def calculate_coordinates(ship)
@@ -28,8 +28,9 @@ module Battleship
       end
     end
 
-    def initialize
-      @cells = Array.new(GRID_SIZE) { Array.new(GRID_SIZE) { Cell.new } }
+    def initialize(size = DEFAULT_SIZE)
+      @size = size
+      @cells = Array.new(size) { Array.new(size) { Cell.new } }
     end
 
     def place_ship(ship)
@@ -44,8 +45,11 @@ module Battleship
 
     def attack(coordinate)
       row, col = self.class.parse_coordinates(coordinate)
-      result = @cells[row][col].hit
+      cell = @cells[row][col]
 
+      return [:already_attacked, [row, col]] if cell.attacked?
+
+      result = cell.hit
       [result, [row, col]]
     end
 
@@ -62,7 +66,7 @@ module Battleship
     end
 
     def within_bounds?(row, col)
-      row.between?(0, GRID_SIZE - 1) && col.between?(0, GRID_SIZE - 1)
+      row.between?(0, @size - 1) && col.between?(0, @size - 1)
     end
   end
 end

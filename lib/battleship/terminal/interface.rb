@@ -21,7 +21,7 @@ module Battleship
         @presenter.display_welcome_message
         @game_engine.players.each do |player|
           @presenter.display_player_turn(player)
-          Engine::NUMBER_OF_SHIPS.times do
+          @game_engine.number_of_ships.times do
             place_ship_for_player(player)
             @presenter.clear_screen
           end
@@ -50,7 +50,11 @@ module Battleship
           @presenter.display_grids(player, opponent)
 
           coordinates = @input_handler.attack_coordinates(player)
-          handle_attack(@game_engine.attack(coordinates))
+          result = @game_engine.attack(coordinates)
+
+          next @presenter.display_already_attacked if result == :already_attacked
+
+          handle_attack(result)
         end
       end
 

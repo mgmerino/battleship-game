@@ -2,14 +2,15 @@
 
 module Battleship
   class Engine
-    NUMBER_OF_SHIPS = 1
+    DEFAULT_NUMBER_OF_SHIPS = 1
 
-    attr_reader :players, :current_player, :opponent
+    attr_reader :players, :current_player, :opponent, :number_of_ships
 
-    def initialize(players)
+    def initialize(players, number_of_ships: DEFAULT_NUMBER_OF_SHIPS)
       @players = players
       @current_player = players[0]
       @opponent = players[1]
+      @number_of_ships = number_of_ships
     end
 
     def spawn_ship(player, size, start_coord, orientation)

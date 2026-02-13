@@ -48,7 +48,7 @@ module Battleship
       end
     end
 
-    describe "#hit_or_miss?" do
+    describe "#attacked?" do
       context "when it is a hit" do
         before do
           cell.place_ship_unit
@@ -56,7 +56,7 @@ module Battleship
         end
 
         it "returns true" do
-          expect(cell.hit_or_miss?).to eq true
+          expect(cell.attacked?).to eq true
         end
       end
 
@@ -66,7 +66,7 @@ module Battleship
         end
 
         it "returns true" do
-          expect(cell.hit_or_miss?).to eq true
+          expect(cell.attacked?).to eq true
         end
       end
 
@@ -76,13 +76,13 @@ module Battleship
         end
 
         it "returns false" do
-          expect(cell.hit_or_miss?).to eq false
+          expect(cell.attacked?).to eq false
         end
       end
 
       context "when it is water" do
         it "returns false" do
-          expect(cell.hit_or_miss?).to eq false
+          expect(cell.attacked?).to eq false
         end
       end
     end

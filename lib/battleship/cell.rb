@@ -29,7 +29,7 @@ module Battleship
       end
     end
 
-    def hit_or_miss?
+    def attacked?
       @state == STATE[:hit] || @state == STATE[:miss]
     end
 
